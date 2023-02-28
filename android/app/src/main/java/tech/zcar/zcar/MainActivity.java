@@ -88,6 +88,9 @@ public class MainActivity extends FlutterActivity implements MethodChannel.Metho
             List<ResolveInfo> infos = pm.queryIntentActivities(intent, PackageManager.MATCH_ALL);
             List<Map<String, Object>> resultList = new ArrayList<>();
             for (ResolveInfo info : infos) {
+                if (info.activityInfo.packageName.equals(context.getPackageName())) {
+                    continue;
+                }
                 Map<String, Object> r = new HashMap<>();
                 r.put("name", info.loadLabel(pm).toString());
                 r.put("packageName", info.activityInfo.packageName);
