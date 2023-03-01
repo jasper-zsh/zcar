@@ -80,16 +80,27 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         children: [
-          ElevatedButton(
-            onPressed: () {
-              _instrumentController.setValue(random.nextDouble() * max);
-            },
-            child: Text('Rotate')
+          ButtonBar(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    _instrumentController.setValue(random.nextDouble() * max);
+                  },
+                  child: Text('Rotate')
+              ),
+              ElevatedButton(onPressed: () {
+                _instrumentController.sweep(max, Duration(seconds: 1));
+              }, child: Text('Sweep'))
+            ],
           ),
           Expanded(child: PointerInstrumentWidget(
             controller: _instrumentController,
             min: min,
             max: max,
+            step: 5,
+            startAngle: 30,
+            endAngle: 330,
+            velocity: 360,
           )),
         ]
       ),
